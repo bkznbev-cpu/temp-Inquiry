@@ -1,16 +1,16 @@
 @extends('layouts.layout')
 @section('title', 'Inquiries')
 
-{{-- Different CSS for this page --}}
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/inquiries.css') }}">
 @endsection
 
 @section('content')
 <div class="inquiries-container">
+
     <!-- Left Sidebar -->
     <aside class="people">
-        <h2>Inqiuries</h2>
+        <h2>Inquiries</h2>
         <input type="text" placeholder="Search inquiry">
         <ul class="chat-list">
             <li class="chat active">Sir Balmond Dagus</li>
@@ -23,21 +23,43 @@
 
     <!-- Chat Window -->
     <main class="chat-window">
-        <div class="messages">
-            <div class="message received">Hello, how are you?</div>
-            <div class="message sent">I'm good, thanks! How about you?</div>
-            <div class="message received">Doing well, thanks for asking!</div>
-        </div>
-        <div class="chat-input">
-            <input type="text" placeholder="Aa">
-            <button>Send</button>
-        </div>
+        <h2 style="text-align:center;">Inquiry Table</h2>
+        <table border="1" width="100%" cellpadding="8" cellspacing="0" style="border-collapse:collapse;">
+            <thead style="background:#3498db; color:white;">
+                <tr>
+                    <th>UserID</th>
+                    <th>Seeker ID</th>
+                    <th>Owner ID</th>
+                    <th>Message</th>
+                    <th>Date Sent</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($inquiries as $inquiry)
+                    <tr>
+                        <td>{{ $inquiry->UserID }}</td>
+                        <td>{{ $inquiry->seeker_id }}</td>
+                        <td>{{ $inquiry->owner_id }}</td>
+                        <td>{{ $inquiry->Message }}</td>
+                        <td>{{ $inquiry->DateSent }}</td>
+                        <td>
+                            @if ($inquiry->Status == 'Pending')
+                                <span style="color:orange;">{{ $inquiry->Status }}</span>
+                            @else
+                                <span style="color:green;">{{ $inquiry->Status }}</span>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </main>
 
     <!-- Right Sidebar -->
     <aside class="chat-info">
         <h3>User Info</h3>
-        <p><strong>Name:</strong>Sir Balmond Dagus</p>
+        <p><strong>Name:</strong> Sir Balmond Dagus</p>
         <p><strong>Status:</strong> Online</p>
         <ul>
             <li>Profile</li>
@@ -45,5 +67,6 @@
             <li>Search</li>
         </ul>
     </aside>
+
 </div>
 @endsection
