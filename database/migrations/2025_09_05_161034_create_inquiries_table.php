@@ -13,11 +13,11 @@ return new class extends Migration
 {
     Schema::create('inquiries', function (Blueprint $table) {
         $table->id('UserID'); // or better: $table->bigIncrements('UserID') if you want a custom primary key
-        $table->unsignedBigInteger('SeekerID');
-        $table->unsignedBigInteger('OwnerID');
+        $table->integer('seeker_id');
+        $table->integer('owner_id');
         $table->text('Message');
         $table->dateTime('DateSent');
-        $table->enum('Status', ['Pending', 'Replied'])->default('Pending');
+        $table->enum('Status', ['Pending', 'Replied']);
         $table->timestamps();
     });
 }

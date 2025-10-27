@@ -20,6 +20,8 @@ return new class extends Migration
             $table->enum('Role',['roomSeeker','roomOwner']);
             $table->timestamp('dateJoined')->useCurrent();
 
+            
+
         });
     }
 
